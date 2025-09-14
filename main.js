@@ -48,10 +48,12 @@ async function loadJobs() {
     container.innerHTML = '';
     allJobs.forEach(job => {
         const card = document.createElement('div');
-        card.className = 'bg-white shadow p-4 rounded';
-        card.innerHTML = `<h3 class="font-bold">${job.title}</h3>
-                          <p>${job.description}</p>
-                          <p class="text-gray-600">Requirements: ${job.requirements}</p>`;
+        // ADDED: Hover effects and transition
+        card.className = 'bg-white shadow p-4 rounded transition-shadow hover:shadow-xl';
+        // ADDED: Icon to the title
+        card.innerHTML = `<h3 class="font-bold text-lg"><i class="fas fa-briefcase mr-2 text-blue-500"></i>${job.title}</h3>
+                          <p class="mt-2 text-gray-700">${job.description}</p>
+                          <p class="mt-2 text-sm text-gray-600"><b>Requirements:</b> ${job.requirements}</p>`;
         container.appendChild(card);
     });
 }
@@ -64,14 +66,15 @@ async function loadResumes() {
 
     resumes.forEach(resume => {
         const card = document.createElement('div');
-        card.className = 'bg-white shadow p-4 rounded';
+        // ADDED: Hover effects and transition
+        card.className = 'bg-white shadow p-4 rounded transition-shadow hover:shadow-xl';
 
         // Job select dropdown
         const select = document.createElement('select');
         select.className = 'border p-2 rounded mb-2 w-full';
         const defaultOption = document.createElement('option');
         defaultOption.value = '';
-        defaultOption.textContent = 'Select a Job';
+        defaultOption.textContent = 'Select a Job to Match';
         select.appendChild(defaultOption);
         allJobs.forEach(job => {
             const option = document.createElement('option');
@@ -83,43 +86,53 @@ async function loadResumes() {
         // Match button
         const btn = document.createElement('button');
         btn.innerText = 'Match Resume';
-        btn.className = 'bg-indigo-500 text-white px-3 py-1 rounded hover:bg-indigo-600';
-        btn.disabled = true; // Enable only if job selected
+        btn.className = 'bg-indigo-500 text-white px-3 py-1 rounded hover:bg-indigo-600 w-full'; // Made button full-width
+        btn.disabled = true;
 
         // Enable button on selection
         select.onchange = () => {
             btn.disabled = !select.value;
         };
 
-        // Match function
+        // --- UPDATED: Match function with Loading State ---
         btn.onclick = async () => {
             if (!select.value) return;
-            const response = await fetch('/match', {
-                method: 'POST',
-                headers: {'Content-Type': 'application/json'},
-                body: JSON.stringify({job_id: parseInt(select.value), resume_id: resume.id})
-            });
-            const match = await response.json();
-            
-            if (response.ok) {
-                // Define the HTML content for the results
-                const resultsHTML = `<strong>Score:</strong> ${match.match_score || 'N/A'}<br>
-                                     <strong>Strengths:</strong> ${match.strengths || 'N/A'}<br>
-                                     <strong>Gaps:</strong> ${match.gaps || 'N/A'}`;
+
+            const originalButtonText = btn.innerText;
+            btn.innerText = 'Matching...';
+            btn.disabled = true;
+
+            try {
+                const response = await fetch('/match', {
+                    method: 'POST',
+                    headers: {'Content-Type': 'application/json'},
+                    body: JSON.stringify({job_id: parseInt(select.value), resume_id: resume.id})
+                });
+                const match = await response.json();
                 
-                // Show results ONLY in the global results section at the bottom
-                document.getElementById('resultsContent').innerHTML = resultsHTML;
-                document.getElementById('matchResults').classList.remove('hidden');
-            } else {
-                alert('Match error: ' + (match.error || 'Unknown'));
+                if (response.ok) {
+                    const resultsHTML = `<strong>Score:</strong> ${match.match_score || 'N/A'}<br>
+                                         <strong>Strengths:</strong> ${match.strengths || 'N/A'}<br>
+                                         <strong>Gaps:</strong> ${match.gaps || 'N/A'}`;
+                    
+                    document.getElementById('resultsContent').innerHTML = resultsHTML;
+                    document.getElementById('matchResults').classList.remove('hidden');
+                } else {
+                    alert('Match error: ' + (match.error || 'Unknown'));
+                }
+            } finally {
+                // This block runs whether the request succeeds or fails
+                btn.innerText = originalButtonText;
+                // Re-enable the button if a job is still selected
+                btn.disabled = !select.value; 
             }
         };
 
-        card.innerHTML = `<h3 class="font-bold">${resume.name}</h3>
-                          <p class="text-sm text-gray-600">${resume.content.substring(0, 150)}...</p>`;
+        // ADDED: Icon to the title
+        card.innerHTML = `<h3 class="font-bold text-lg"><i class="fas fa-file-alt mr-2 text-green-500"></i>${resume.name}</h3>
+                          <p class="text-sm text-gray-600 my-2">${resume.content.substring(0, 150)}...</p>`;
         card.appendChild(select);
         card.appendChild(btn);
-        // The individual result box is no longer appended to the card
         container.appendChild(card);
     });
 }
