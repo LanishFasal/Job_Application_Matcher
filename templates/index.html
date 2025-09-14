@@ -3,12 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Job Application Matcher</title>
+    <title>AI Job Matcher</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <!-- ADDED: Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 </head>
 <body class="bg-gray-100 p-6">
     <div class="max-w-6xl mx-auto">
-        <h1 class="text-3xl font-bold text-gray-800 mb-8">Job Application Matcher</h1>
+        <h1 class="text-3xl font-bold text-gray-800 mb-8">AI Job & Resume Matcher</h1>
 
         <!-- Add Job Form -->
         <div class="bg-white p-6 rounded-lg shadow-md mb-6">
@@ -46,20 +48,23 @@
             </form>
         </div>
 
-        <!-- Jobs List -->
-        <div class="bg-white p-6 rounded-lg shadow-md mb-6">
-            <h2 class="text-2xl font-semibold mb-4">Job Postings</h2>
-            <div id="jobsContainer" class="space-y-4"></div>
-        </div>
+        <!-- UPDATED: Two-column layout for Jobs and Resumes -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <!-- Jobs List -->
+            <div class="bg-white p-6 rounded-lg shadow-md">
+                <h2 class="text-2xl font-semibold mb-4">Job Postings</h2>
+                <div id="jobsContainer" class="space-y-4"></div>
+            </div>
 
-        <!-- Resumes List -->
-        <div class="bg-white p-6 rounded-lg shadow-md mb-6">
-            <h2 class="text-2xl font-semibold mb-4">Resumes</h2>
-            <div id="resumesContainer" class="space-y-4"></div>
+            <!-- Resumes List -->
+            <div class="bg-white p-6 rounded-lg shadow-md">
+                <h2 class="text-2xl font-semibold mb-4">Resumes</h2>
+                <div id="resumesContainer" class="space-y-4"></div>
+            </div>
         </div>
 
         <!-- Match Results -->
-        <div id="matchResults" class="bg-white p-6 rounded-lg shadow-md hidden">
+        <div id="matchResults" class="bg-white p-6 rounded-lg shadow-md hidden mt-6">
             <h2 class="text-2xl font-semibold mb-4">Latest Match Results</h2>
             <div id="resultsContent"></div>
         </div>
