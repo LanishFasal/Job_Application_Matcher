@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
     
     <style>
+        /* This style block is no longer needed for the dropdown design, but we can keep it for other potential uses or remove it. */
         .details-content {
             max-height: 0;
             overflow: hidden;
@@ -57,22 +58,26 @@
 
         <!-- Two-column layout for Jobs and Resumes -->
         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <!-- Jobs List -->
+            
+            <!-- UPDATED: Jobs List as a Dropdown -->
             <div class="bg-white p-6 rounded-lg shadow-md">
                 <h2 class="text-2xl font-semibold mb-4">Job Postings</h2>
-                <div id="jobsContainer" class="space-y-4"></div>
+                <select id="jobsDropdown" class="w-full p-2 border border-gray-300 rounded-md"></select>
+                <!-- This div will show the details of the selected job -->
+                <div id="jobDetailsContainer" class="mt-4 p-4 border-t border-gray-200"></div>
             </div>
 
-            <!-- Resumes List -->
+            <!-- UPDATED: Resumes List as a Dropdown -->
             <div class="bg-white p-6 rounded-lg shadow-md">
                 <h2 class="text-2xl font-semibold mb-4">Resumes</h2>
-                <div id="resumesContainer" class="space-y-4"></div>
+                <select id="resumesDropdown" class="w-full p-2 border border-gray-300 rounded-md"></select>
+                <!-- This div will show the details and matcher for the selected resume -->
+                <div id="resumeDetailsContainer" class="mt-4 pt-4 border-t border-gray-200"></div>
             </div>
         </div>
 
         <!-- Match Results -->
         <div id="matchResults" class="bg-white p-6 rounded-lg shadow-md hidden mt-6">
-            <!-- UPDATED: Title is more generic now -->
             <h2 class="text-2xl font-semibold mb-4">Match Result</h2>
             <div id="resultsContent"></div>
         </div>
