@@ -2,7 +2,7 @@
 
 <img width="1437" height="865" alt="Screenshot 2025-09-15 150714" src="https://github.com/user-attachments/assets/398b13f6-6afc-4b44-9415-a9f4e896d6e5" />
 
-<img width="1286" height="880" alt="Screenshot 2025-09-15 150745" src="https://github.com/user-attachments/assets/86e71943-bf18-4183-ac26-18acb005d27b" />
+<img width="909" height="869" alt="image" src="https://github.com/user-attachments/assets/e80977d2-02fb-453f-86d0-d472e039b812" />
 
 An intelligent web application that uses Google's Gemini Pro AI to analyze, score, and find the perfect match between job descriptions and candidate resumes. This tool streamlines the initial screening process for recruiters by providing a data-driven match score, highlighting candidate strengths, and identifying skill gaps.
 
