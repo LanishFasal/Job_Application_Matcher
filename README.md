@@ -1,6 +1,6 @@
 # AI-Powered Job & Resume Matcher
 
-<img width="1437" height="865" alt="Screenshot 2025-09-15 150714" src="https://github.com/user-attachments/assets/398b13f6-6afc-4b44-9415-a9f4e896d6e5" />
+<img width="1575" height="704" alt="image" src="https://github.com/user-attachments/assets/e1cff75f-6a5e-47d6-b83f-1ef5e5cd92c7" />
 
 <img width="909" height="869" alt="image" src="https://github.com/user-attachments/assets/e80977d2-02fb-453f-86d0-d472e039b812" />
 
