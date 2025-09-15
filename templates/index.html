@@ -8,7 +8,6 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
     
     <style>
-        /* This style block is no longer needed for the dropdown design, but we can keep it for other potential uses or remove it. */
         .details-content {
             max-height: 0;
             overflow: hidden;
@@ -20,58 +19,63 @@
     <div class="max-w-6xl mx-auto">
         <h1 class="text-3xl font-bold text-gray-800 mb-8">AI Job & Resume Matcher</h1>
 
-        <!-- Add Job Form -->
-        <div class="bg-white p-6 rounded-lg shadow-md mb-6">
-            <h2 class="text-2xl font-semibold mb-4">Add Job Posting</h2>
-            <form id="jobForm" class="space-y-4">
-                <div>
-                    <label for="jobTitle" class="block text-sm font-medium text-gray-700">Title</label>
-                    <input type="text" id="jobTitle" class="mt-1 block w-full p-2 border border-gray-300 rounded-md">
-                </div>
-                <div>
-                    <label for="jobDesc" class="block text-sm font-medium text-gray-700">Description</label>
-                    <textarea id="jobDesc" rows="3" class="mt-1 block w-full p-2 border border-gray-300 rounded-md"></textarea>
-                </div>
-                <div>
-                    <label for="jobReq" class="block text-sm font-medium text-gray-700">Requirements</label>
-                    <textarea id="jobReq" rows="3" class="mt-1 block w-full p-2 border border-gray-300 rounded-md"></textarea>
-                </div>
-                <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">Add Job</button>
-            </form>
-        </div>
+        <!-- START: New Grid Wrapper for the Forms -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+            
+            <!-- Column 1: Add Job Form -->
+            <!-- Note: We remove the mb-6 (margin-bottom) from this div as the parent now handles it -->
+            <div class="bg-white p-6 rounded-lg shadow-md">
+                <h2 class="text-2xl font-semibold mb-4">Add Job Posting</h2>
+                <form id="jobForm" class="space-y-4">
+                    <div>
+                        <label for="jobTitle" class="block text-sm font-medium text-gray-700">Title</label>
+                        <input type="text" id="jobTitle" class="mt-1 block w-full p-2 border border-gray-300 rounded-md">
+                    </div>
+                    <div>
+                        <label for="jobDesc" class="block text-sm font-medium text-gray-700">Description</label>
+                        <textarea id="jobDesc" rows="3" class="mt-1 block w-full p-2 border border-gray-300 rounded-md"></textarea>
+                    </div>
+                    <div>
+                        <label for="jobReq" class="block text-sm font-medium text-gray-700">Requirements</label>
+                        <textarea id="jobReq" rows="3" class="mt-1 block w-full p-2 border border-gray-300 rounded-md"></textarea>
+                    </div>
+                    <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">Add Job</button>
+                </form>
+            </div>
 
-        <!-- Add Resume Form -->
-        <div class="bg-white p-6 rounded-lg shadow-md mb-6">
-            <h2 class="text-2xl font-semibold mb-4">Add Resume</h2>
-            <form id="resumeForm" class="space-y-4">
-                <div>
-                    <label for="resumeName" class="block text-sm font-medium text-gray-700">Name</label>
-                    <input type="text" id="resumeName" class="mt-1 block w-full p-2 border border-gray-300 rounded-md">
-                </div>
-                <div>
-                    <label for="resumeContent" class="block text-sm font-medium text-gray-700">Resume Content</label>
-                    <textarea id="resumeContent" rows="4" class="mt-1 block w-full p-2 border border-gray-300 rounded-md"></textarea>
-                </div>
-                <button type="submit" class="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600">Add Resume</button>
-            </form>
-        </div>
+            <!-- Column 2: Add Resume Form -->
+            <!-- Note: We remove the mb-6 from this div as well -->
+            <div class="bg-white p-6 rounded-lg shadow-md">
+                <h2 class="text-2xl font-semibold mb-4">Add Resume</h2>
+                <form id="resumeForm" class="space-y-4">
+                    <div>
+                        <label for="resumeName" class="block text-sm font-medium text-gray-700">Name</label>
+                        <input type="text" id="resumeName" class="mt-1 block w-full p-2 border border-gray-300 rounded-md">
+                    </div>
+                    <div>
+                        <label for="resumeContent" class="block text-sm font-medium text-gray-700">Resume Content</label>
+                        <textarea id="resumeContent" rows="4" class="mt-1 block w-full p-2 border border-gray-300 rounded-md"></textarea>
+                    </div>
+                    <button type="submit" class="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600">Add Resume</button>
+                </form>
+            </div>
 
-        <!-- Two-column layout for Jobs and Resumes -->
+        </div>
+        <!-- END: New Grid Wrapper for the Forms -->
+
+
+        <!-- Two-column layout for Jobs and Resumes LISTS (This section remains unchanged) -->
         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
             
-            <!-- UPDATED: Jobs List as a Dropdown -->
             <div class="bg-white p-6 rounded-lg shadow-md">
                 <h2 class="text-2xl font-semibold mb-4">Job Postings</h2>
                 <select id="jobsDropdown" class="w-full p-2 border border-gray-300 rounded-md"></select>
-                <!-- This div will show the details of the selected job -->
                 <div id="jobDetailsContainer" class="mt-4 p-4 border-t border-gray-200"></div>
             </div>
 
-            <!-- UPDATED: Resumes List as a Dropdown -->
             <div class="bg-white p-6 rounded-lg shadow-md">
                 <h2 class="text-2xl font-semibold mb-4">Resumes</h2>
                 <select id="resumesDropdown" class="w-full p-2 border border-gray-300 rounded-md"></select>
-                <!-- This div will show the details and matcher for the selected resume -->
                 <div id="resumeDetailsContainer" class="mt-4 pt-4 border-t border-gray-200"></div>
             </div>
         </div>
@@ -85,7 +89,6 @@
 
     <script src="{{ url_for('static', filename='main.js') }}"></script>
     <script>
-        // Fallback form event listeners
         document.getElementById('jobForm').addEventListener('submit', function(e) {
             e.preventDefault();
             addJob();
